@@ -11,7 +11,7 @@ HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 def get_html(url):
     chrome_options = Options()
     chrome_options.add_argument("--headless")
-    browser = webdriver.Chrome(options=chrome_options, executable_path="chromedriver.exe")
+    browser = webdriver.Chrome(options=chrome_options, executable_path="/chromedriver.exe")
     browser.get(url)
     r = browser.page_source
     browser.quit()
