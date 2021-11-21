@@ -10,13 +10,10 @@ logger = telebot.logger
 logger.setLevel(logging.DEBUG)
 server = Flask(__name__)
 
-@bot.message_handler(commands=['start'])
+@bot.message_handler(commands=['free'])
 def start(message):
-    bot.reply_to(message, 'hello,' + message.from_user.first_name)
+    bot.send_message(message.chat.id,"Привет")
 
-@bot.message_handler(func=lambda message: True, content_types=['text'])
-def echo(message):
-    bot.reply_to(message, message.text)
 
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
