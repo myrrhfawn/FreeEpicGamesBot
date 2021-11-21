@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.options import Options
 URL = 'https://www.epicgames.com/store/ru'
 HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 'accept': '*/*'}
 GOOGLE_CHROME_BIN = '/app/.apt/usr/bin/google-chrome'
-CHROMEDRIVER_PATH ='/app/.chromedriver/bin/chromedriver.'
+CHROMEDRIVER_PATH ='/app/.chromedriver/bin/chromedriver'
 
 
 def get_html(url):
