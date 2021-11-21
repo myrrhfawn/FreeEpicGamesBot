@@ -13,10 +13,10 @@ CHROMEDRIVER_PATH ='/app/.chromedriver/bin/chromedriver'
 
 
 def get_html(url):
-    chrome_options = Options()
-    chrome_options.binary_location = GOOGLE_CHROME_BIN
+    chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
+    chrome_options.binary_location = GOOGLE_CHROME_BIN
     browser = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
     browser.get(url)
     r = browser.page_source
