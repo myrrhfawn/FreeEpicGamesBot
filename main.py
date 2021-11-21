@@ -7,13 +7,13 @@ APP_URL = f'https://git.heroku.com/freeepicgamesbot.git{TOKEN}'
 bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
-@bot.mesage_handler(commands=['start'])
+@bot.message_handler(commands=['start'])
 def start(message):
     bot.reply_to(message, 'hello,' + message.from_user)
 
-@bot.mesage_handler(func=lamda message: True, cotent_types=['text'])
+@bot.message_handler(func=lambda message: True, content_types=['text'])
 def echo(message):
-    bor.reply_to(message, message.text)
+    bot.reply_to(message, message.text)
 
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
@@ -25,7 +25,7 @@ def get_message():
 @server.route('/')
 def webhook():
     bot.remove_webhook()
-    bor.set_webhook(url=APP_URL)
+    bot.set_webhook(url=APP_URL)
     return '!', 200
 
 
