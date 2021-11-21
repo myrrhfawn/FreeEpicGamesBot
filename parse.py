@@ -8,11 +8,16 @@ from selenium.webdriver.chrome.options import Options
 
 URL = 'https://www.epicgames.com/store/ru'
 HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 'accept': '*/*'}
+GOOGLE_CHROME_BIN = '/app/.apt/usr/bin/google-chrome'
+CHROMEDRIVER_PATH ='/app/.chromedriver/bin/chromedriver.'
+
 
 def get_html(url):
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_SHIM', None)
-    browser = webdriver.Chrome(executable_path='chromedriver.exe', chrome_options=chrome_options)
+    chrome_options = Options()
+    chrome_options.binary_location = GOOGLE_CHROME_BIN
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--no-sandbox')
+    browser = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
     browser.get(url)
     r = browser.page_source
     browser.quit()

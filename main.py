@@ -9,7 +9,7 @@ TOKEN = "2118961153:AAFISocvOir_rVhDEXMGHUL4NCJaaMzg4ng"
 APP_URL = 'https://freeepicgamesbot.herokuapp.com/'+TOKEN
 bot = telebot.TeleBot(TOKEN)
 logger = telebot.logger
-logger.setLevel(logging.DEBUG)
+logger.setLevel(laogging.DEBUG)
 server = Flask(__name__)
 
 @bot.message_handler(commands=['free'])
