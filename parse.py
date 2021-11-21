@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 import time
@@ -9,9 +10,9 @@ URL = 'https://www.epicgames.com/store/ru'
 HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 'accept': '*/*'}
 
 def get_html(url):
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    browser = webdriver.Chrome(options=chrome_options, executable_path="/chromedriver.exe")
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_SHIM', None)
+    browser = webdriver.Chrome(executable_path="chromedriver", chrome_options=chrome_options)
     browser.get(url)
     r = browser.page_source
     browser.quit()
