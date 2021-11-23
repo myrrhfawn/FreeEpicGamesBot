@@ -17,10 +17,7 @@ def start(message):
     photo = game["image"]
     url = "https://www.epicgames.com" + game["link"]
     for game in games:
-        bot.send_photo(chat_id=chat_id,
-                       caption=text,
-                       photo=photo)
-        print('Sucsses games')
+        bot.send_message(chat_id=chat_id, text=text)
 
 
 
