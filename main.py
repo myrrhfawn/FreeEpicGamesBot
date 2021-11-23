@@ -12,9 +12,9 @@ logger = telebot.logger
 logger.setLevel(logging.DEBUG)
 server = Flask(__name__)
 
-@bot.message_handler(commands=['free'])
+@bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_message(message.chat.id,"Привет")
+    bot.reply_to(message,'loh')
 
 
 @server.route('/' + TOKEN, methods=['POST'])
