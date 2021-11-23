@@ -9,14 +9,16 @@ bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
 
+
 @bot.message_handler(commands=['free'])
 def start(message):
     chat_id = message.chat.id
     games = parse.parse()
-    text = '*' + game["title"] + '*' + "\n" + game["timer"]
-    photo = game["image"]
-    url = "https://www.epicgames.com" + game["link"]
     for game in games:
+        text = '*' + game["title"] + '*' + "\n" + game["timer"]
+        photo = game["image"]
+        url = "https://www.epicgames.com" + game["link"]
+        bot.send_photo(chat_id=chat_id, photo=url)
         bot.send_message(chat_id=chat_id, text=text)
 
 
