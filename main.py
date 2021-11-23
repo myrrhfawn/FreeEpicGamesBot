@@ -1,15 +1,13 @@
 import parse
 import os
-import logging
 import telebot
 from flask import Flask, request
 
 games = parse.parse()
+print(games)
 TOKEN = "2118961153:AAFISocvOir_rVhDEXMGHUL4NCJaaMzg4ng"
 APP_URL = 'https://freeepicgamesbot.herokuapp.com/'+TOKEN
 bot = telebot.TeleBot(TOKEN)
-logger = telebot.logger
-logger.setLevel(logging.DEBUG)
 server = Flask(__name__)
 
 @bot.message_handler(commands=['start'])
