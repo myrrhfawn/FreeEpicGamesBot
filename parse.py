@@ -32,7 +32,7 @@ def get_content(html):
             'image': item.find("div", class_="css-1lozana").find('img')['data-image'],
             'title': item.find('div', class_='css-1h2ruwl').get_text(),
             'timer': item.find('span', class_='css-os6fbq').get_text().replace('\xa0', ' '),
-            'link' : item.find("div", class_="css-nq799m").find('a')['href']
+            'link': item.find("div", class_="css-nq799m").find('a')['href']
         })
     return games
 

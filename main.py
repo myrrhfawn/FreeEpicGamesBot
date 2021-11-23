@@ -1,8 +1,11 @@
 import parse
 import os
 import telebot
+import time
+import schedule
 from telebot import types
 from flask import Flask, request
+from threading import Thread
 
 TOKEN = "2118961153:AAFISocvOir_rVhDEXMGHUL4NCJaaMzg4ng"
 APP_URL = 'https://freeepicgamesbot.herokuapp.com/'+TOKEN
@@ -10,8 +13,9 @@ bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 games = parse.parse()
 
+
 @bot.message_handler(commands=['free'])
-def start(message):
+def free(message):
     chat_id = message.chat.id
     for game in games:
         text = '*' + game["title"] + '*' + "\n" + game["timer"]
@@ -27,6 +31,15 @@ def start(message):
                        reply_markup=markup
                        )
 
+def schedule_checker():
+    while True:
+        schedule.run_pending()
+        time.sleep(3)
+
+def change_game():
+    games = parse.parse()
+    return games
+
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
     json_string = request.get_data().decode('utf-8')
@@ -41,4 +54,7 @@ def webhook():
     return '!', 200
 
 if __name__ == '__main__':
+    print("start")
+    schedule.every().friday.at("22:00").do(change_game)
+    Thread(target=schedule_checker).start()
     server.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
