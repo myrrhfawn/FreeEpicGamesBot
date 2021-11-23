@@ -19,7 +19,8 @@ def start(message):
     for game in games:
         bot.send_photo(chat_id=chat_id,
                        caption=text,
-                       photo=photo,                       )
+                       photo=photo)
+        print('Sucsses games')
 
 
 
