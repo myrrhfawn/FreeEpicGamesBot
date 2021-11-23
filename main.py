@@ -3,8 +3,6 @@ import os
 import telebot
 from flask import Flask, request
 
-games = parse.parse()
-print(games)
 TOKEN = "2118961153:AAFISocvOir_rVhDEXMGHUL4NCJaaMzg4ng"
 APP_URL = 'https://freeepicgamesbot.herokuapp.com/'+TOKEN
 bot = telebot.TeleBot(TOKEN)
