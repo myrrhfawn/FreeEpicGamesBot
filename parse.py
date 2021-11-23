@@ -1,4 +1,6 @@
+import os
 import requests
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -8,7 +10,7 @@ HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 def get_html(url):
 
-    browser = webdriver.Chrome(ChromeDriverManager().install())
+    browser = webdriver.Chrome(executable_path="chromedriver.exe")
     browser.get(url)
     r = browser.page_source
     browser.quit()
