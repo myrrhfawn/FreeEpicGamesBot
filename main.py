@@ -13,8 +13,15 @@ server = Flask(__name__)
 def start(message):
     chat_id = message.chat.id
     games = parse.parse()
+    text = '*' + game["title"] + '*' + "\n" + game["timer"]
+    photo = game["image"]
+    url = "https://www.epicgames.com" + game["link"]
     for game in games:
-        bot.send_message(chat_id=chat_id, text=game["title"])
+        bot.send_photo(chat_id=chat_id,
+                       caption=text,
+                       photo=photo,                       )
+
+
 
 
 @server.route('/' + TOKEN, methods=['POST'])
