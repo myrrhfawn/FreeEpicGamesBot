@@ -8,9 +8,13 @@ APP_URL = 'https://freeepicgamesbot.herokuapp.com/'+TOKEN
 bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
-@bot.message_handler(commands=['start'])
+
+@bot.message_handler(commands=['free'])
 def start(message):
-    bot.reply_to(message,'loh')
+    chat_id = message.chat.id
+    games = parse.parse()
+    for game in games:
+        bot.send_message(chat_id=chat_id, text=game["title"])
 
 
 @server.route('/' + TOKEN, methods=['POST'])
