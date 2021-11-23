@@ -1,24 +1,25 @@
-
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import time
+from webdriver_manager.chrome import ChromeDriverManager
 
 URL = 'https://www.epicgames.com/store/ru'
 HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 'accept': '*/*'}
 
 
 def get_html(url):
-    GOOGLE_CHROME_BIN = '/app/.apt/usr/bin/google-chrome'
-    CHROMEDRIVER_PATH = '/app/.chromedriver/bin/'
-    chrome_options = Options()
-    chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.binary_location = GOOGLE_CHROME_BIN
-    browser = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("window-size=1920x1480")
+    chrome_options.add_argument("disable-dev-shm-usage")
+    browser = webdriver.Chrome(
+        chrome_options=chrome_options, executable_path=ChromeDriverManager().install()
+    )
     browser.get(url)
+    time.sleep(3)
     r = browser.page_source
-    browser.quit()
+    browser.close()
     return r
 
 def get_content(html):
