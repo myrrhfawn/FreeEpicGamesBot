@@ -1,31 +1,31 @@
 import parse
 import os
 import telebot
+from telebot import types
 from flask import Flask, request
 
 TOKEN = "2118961153:AAFISocvOir_rVhDEXMGHUL4NCJaaMzg4ng"
 APP_URL = 'https://freeepicgamesbot.herokuapp.com/'+TOKEN
 bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
-
-
+games = parse.parse()
 
 @bot.message_handler(commands=['free'])
 def start(message):
     chat_id = message.chat.id
-    games = parse.parse()
     for game in games:
         text = '*' + game["title"] + '*' + "\n" + game["timer"]
         photo = game["image"]
         url = "https://www.epicgames.com" + game["link"]
+        markup = types.InlineKeyboardMarkup(row_width=1)
+        item = types.InlineKeyboardButton('Перейти', url=url)
+        markup.add(item)
         bot.send_photo(chat_id=chat_id,
+                       parse_mode='Markdown',
                        photo=photo,
-                       caption=text
+                       caption=text,
+                       reply_markup=markup
                        )
-
-
-
-
 
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
