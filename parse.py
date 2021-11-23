@@ -1,16 +1,21 @@
-import os
+
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 
 URL = 'https://www.epicgames.com/store/ru'
 HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 'accept': '*/*'}
 
 
 def get_html(url):
-
-    browser = webdriver.Chrome(executable_path="C:\\Users\\rostyk\\Downloads\\Важливе\\FreeEpicGamesBot2.0\\chromedriver.exe")
+    GOOGLE_CHROME_BIN = '/app/.apt/usr/bin/google-chrome'
+    CHROMEDRIVER_PATH = '/app/.chromedriver/bin/'
+    chrome_options = Options()
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.binary_location = GOOGLE_CHROME_BIN
+    browser = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
     browser.get(url)
     r = browser.page_source
     browser.quit()
