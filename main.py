@@ -18,23 +18,9 @@ def start(message):
         text = '*' + game["title"] + '*' + "\n" + game["timer"]
         photo = game["image"]
         url = "https://www.epicgames.com" + game["link"]
-        markdown = """
-             *bold text*
-             _italic text_
-             [text](URL)
-             """
-        markup = InlineKeyboardMarkup(
-            inline_keyboard=[
-                [
-                    InlineKeyboardButton(text="Перейти", url=url)
-                ]
-            ]
-        )
         bot.send_photo(chat_id=chat_id,
                        photo=photo,
-                       caption=text,
-                       parse_mode="Markdown",
-                       reply_markup=markup
+                       caption=text
                        )
 
 
