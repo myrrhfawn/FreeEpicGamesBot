@@ -68,6 +68,6 @@ def webhook():
 
 if __name__ == '__main__':
     print("start")
-    schedule.every(5).minutes.do(change_game)
+    schedule.every(1).minutes.do(change_game)
     Thread(target=schedule_checker).start()
     server.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
