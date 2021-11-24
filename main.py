@@ -39,20 +39,7 @@ def schedule_checker():
 
 def change_game():
     games = parse.parse()
-    for game in games:
-        print("game")
-        text = '*' + game["title"] + '*' + "\n" + game["timer"]
-        photo = game["image"]
-        url = "https://www.epicgames.com" + game["link"]
-        markup = types.InlineKeyboardMarkup(row_width=1)
-        item = types.InlineKeyboardButton('Перейти', url=url)
-        markup.add(item)
-        bot.send_photo(chat_id=790960242,
-                       parse_mode='Markdown',
-                       photo=photo,
-                       caption=text,
-                       reply_markup=markup
-                       )
+
     return games
 
 @server.route('/' + TOKEN, methods=['POST'])
