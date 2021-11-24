@@ -17,7 +17,7 @@ games = parse.parse()
 @bot.message_handler(commands=['free'])
 def free(message):
     chat_id = message.chat.id
-    print("chat_id is" + chat_id)
+    print("chat_id is" + str(chat_id))
     for game in games:
         text = '*' + game["title"] + '*' + "\n" + game["timer"]
         photo = game["image"]
