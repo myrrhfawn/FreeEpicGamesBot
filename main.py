@@ -13,11 +13,9 @@ bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 games = parse.parse()
 
-
 @bot.message_handler(commands=['free'])
 def free(message):
     chat_id = message.chat.id
-    print("chat_id is" + str(chat_id))
     for game in games:
         text = '*' + game["title"] + '*' + "\n" + game["timer"]
         photo = game["image"]
@@ -40,7 +38,6 @@ def schedule_checker():
 def change_game():
     games = parse.parse()
     for game in games:
-        print("game")
         text = '*' + game["title"] + '*' + "\n" + game["timer"]
         photo = game["image"]
         url = "https://www.epicgames.com" + game["link"]
