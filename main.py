@@ -45,7 +45,7 @@ def change_game():
         markup = types.InlineKeyboardMarkup(row_width=1)
         item = types.InlineKeyboardButton('Перейти', url=url)
         markup.add(item)
-        bot.send_photo(chat_id='790960241',
+        bot.send_photo(chat_id=790960241,
                        parse_mode='Markdown',
                        photo=photo,
                        caption=text,
