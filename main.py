@@ -17,7 +17,6 @@ games = parse.parse()
 @bot.message_handler(commands=['free'])
 def free(message):
     chat_id = message.chat.id
-    print(chat_id)
     for game in games:
         text = '*' + game["title"] + '*' + "\n" + game["timer"]
         photo = game["image"]
@@ -39,6 +38,19 @@ def schedule_checker():
 
 def change_game():
     games = parse.parse()
+    for game in games:
+        text = '*' + game["title"] + '*' + "\n" + game["timer"]
+        photo = game["image"]
+        url = "https://www.epicgames.com" + game["link"]
+        markup = types.InlineKeyboardMarkup(row_width=1)
+        item = types.InlineKeyboardButton('Перейти', url=url)
+        markup.add(item)
+        bot.send_photo(chat_id="790960241",
+                       parse_mode='Markdown',
+                       photo=photo,
+                       caption=text,
+                       reply_markup=markup
+                       )
     return games
 
 @server.route('/' + TOKEN, methods=['POST'])
@@ -56,6 +68,6 @@ def webhook():
 
 if __name__ == '__main__':
     print("start")
-    schedule.every().friday.at("22:00").do(change_game)
+    schedule.every(5).minutes.do(change_game)
     Thread(target=schedule_checker).start()
     server.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
