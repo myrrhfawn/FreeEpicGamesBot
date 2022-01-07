@@ -14,25 +14,23 @@ games = parse.parse()
 @bot.message_handler(commands=['free'])
 def free(message):
     chat_id = message.chat.id
-    for game in games:
+    for element in games:
+        if element['promotions'] and element['promotions']['promotionalOffers']:
+            title = element['title']
+            id = element['productSlug']
+            url = f'https://www.epicgames.com/store/ru/p/{id}'
+            photo = element['keyImages'][1]['url']
+            print(f"Title: {title}\nURL: {href}\nImage: {image}")
 
-        for element in games:
-            if element['promotions'] and element['promotions']['promotionalOffers']:
-                title = element['title']
-                id = element['productSlug']
-                url = f'https://www.epicgames.com/store/ru/p/{id}'
-                photo = element['keyImages'][1]['url']
-                print(f"Title: {title}\nURL: {href}\nImage: {image}")
-
-                markup = types.InlineKeyboardMarkup(row_width=1)
-                item = types.InlineKeyboardButton('Перейти', url=url)
-                markup.add(item)
-                bot.send_photo(chat_id=chat_id,
+            markup = types.InlineKeyboardMarkup(row_width=1)
+            item = types.InlineKeyboardButton('Перейти', url=url)
+            markup.add(item)
+            bot.send_photo(chat_id=chat_id,
                     parse_mode='Markdown',
-                       photo=photo,
-                       caption=title,
-                       reply_markup=markup
-                       )
+                    photo=photo,
+                    caption=title,
+                    reply_markup=markup
+                    )
 
 
 @server.route('/' + TOKEN, methods=['POST'])
@@ -50,5 +48,4 @@ def webhook():
 
 if __name__ == '__main__':
     print("start")
-
     server.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
