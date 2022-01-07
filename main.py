@@ -33,6 +33,28 @@ def free(message):
                     )
 
 
+@bot.message_handler(commands=['next'])
+def free(message):
+    chat_id = message.chat.id
+    games = parse.parse()
+    for element in games:
+        if element['promotions'] and element['promotions']['upcomingPromotionalOffers']:
+            title = element['title']
+            id = element['productSlug']
+            url = f'https://www.epicgames.com/store/ru/p/{id}'
+            photo = element['keyImages'][1]['url']
+            print(f"Title: {title}\nURL: {url}\nImage: {photo}")
+            markup = types.InlineKeyboardMarkup(row_width=1)
+            item = types.InlineKeyboardButton('Перейти', url=url)
+            markup.add(item)
+            bot.send_photo(chat_id=chat_id,
+                    parse_mode='Markdown',
+                    photo=photo,
+                    caption=title,
+                    reply_markup=markup
+                    )
+
+
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
     json_string = request.get_data().decode('utf-8')
