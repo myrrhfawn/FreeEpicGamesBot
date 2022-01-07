@@ -1,11 +1,9 @@
 import parse
 import os
 import telebot
-import time
-import schedule
 from telebot import types
 from flask import Flask, request
-from threading import Thread
+
 
 TOKEN = "2118961153:AAFISocvOir_rVhDEXMGHUL4NCJaaMzg4ng"
 APP_URL = 'https://freeepicgamesbot.herokuapp.com/'+TOKEN
@@ -17,40 +15,25 @@ games = parse.parse()
 def free(message):
     chat_id = message.chat.id
     for game in games:
-        text = '*' + game["title"] + '*' + "\n" + game["timer"]
-        photo = game["image"]
-        url = "https://www.epicgames.com" + game["link"]
-        markup = types.InlineKeyboardMarkup(row_width=1)
-        item = types.InlineKeyboardButton('Перейти', url=url)
-        markup.add(item)
-        bot.send_photo(chat_id=chat_id,
-                       parse_mode='Markdown',
+
+        for element in games:
+            if element['promotions'] and element['promotions']['promotionalOffers']:
+                title = element['title']
+                id = element['productSlug']
+                url = f'https://www.epicgames.com/store/ru/p/{id}'
+                photo = element['keyImages'][1]['url']
+                print(f"Title: {title}\nURL: {href}\nImage: {image}")
+
+                markup = types.InlineKeyboardMarkup(row_width=1)
+                item = types.InlineKeyboardButton('Перейти', url=url)
+                markup.add(item)
+                bot.send_photo(chat_id=chat_id,
+                    parse_mode='Markdown',
                        photo=photo,
-                       caption=text,
+                       caption=title,
                        reply_markup=markup
                        )
 
-def schedule_checker():
-    while True:
-        schedule.run_pending()
-        time.sleep(3)
-
-def change_game():
-    games = parse.parse()
-    for game in games:
-        text = '*' + game["title"] + '*' + "\n" + game["timer"]
-        photo = game["image"]
-        url = "https://www.epicgames.com" + game["link"]
-        markup = types.InlineKeyboardMarkup(row_width=1)
-        item = types.InlineKeyboardButton('Перейти', url=url)
-        markup.add(item)
-        bot.send_photo(chat_id=472883978,
-                       parse_mode='Markdown',
-                       photo=photo,
-                       caption=text,
-                       reply_markup=markup
-                       )
-    return games
 
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
@@ -67,6 +50,5 @@ def webhook():
 
 if __name__ == '__main__':
     print("start")
-    schedule.every().friday.at("22:00").do(change_game)
-    Thread(target=schedule_checker).start()
+
     server.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
