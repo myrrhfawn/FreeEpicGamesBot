@@ -9,19 +9,19 @@ TOKEN = "2118961153:AAFISocvOir_rVhDEXMGHUL4NCJaaMzg4ng"
 APP_URL = 'https://freeepicgamesbot.herokuapp.com/'+TOKEN
 bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
-games = parse.parse()
+
 
 @bot.message_handler(commands=['free'])
 def free(message):
     chat_id = message.chat.id
+    games = parse.parse()
     for element in games:
         if element['promotions'] and element['promotions']['promotionalOffers']:
             title = element['title']
             id = element['productSlug']
             url = f'https://www.epicgames.com/store/ru/p/{id}'
             photo = element['keyImages'][1]['url']
-            print(f"Title: {title}\nURL: {href}\nImage: {image}")
-
+            print(f"Title: {title}\nURL: {url}\nImage: {photo}")
             markup = types.InlineKeyboardMarkup(row_width=1)
             item = types.InlineKeyboardButton('Перейти', url=url)
             markup.add(item)
