@@ -48,7 +48,7 @@ def free(message):
             ed = datetime.strptime(edate, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
             sdate = element['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['startDate']
             sd = datetime.strptime(sdate, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
-            data = f"Безплатно з {sd.strftime('%d %b')} \nдо {ed.strftime('%d %b.')}"
+            data = f"Безплатно з {sd.strftime('%d %b')} до {ed.strftime('%d %b.')}"
 
             title = f" *{element['title']}*\n\n{element['description']}\n*{data}*"
             id = element['productSlug']
