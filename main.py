@@ -3,6 +3,7 @@ import os
 import telebot
 from telebot import types
 from flask import Flask, request
+from datetime import datetime, timedelta
 
 
 TOKEN = "2118961153:AAFISocvOir_rVhDEXMGHUL4NCJaaMzg4ng"
@@ -17,7 +18,11 @@ def free(message):
     games = parse.parse()
     for element in games:
         if element['promotions'] and element['promotions']['promotionalOffers']:
-            title = f" *{element['title']}*\n\n{element['description']}"
+            date = element['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
+            d = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
+            endData = f"Бесплатно до {d}"
+
+            title = f" *{element['title']}*\n\n{element['description']}\n*{endData}*"
             id = element['productSlug']
             url = f'https://www.epicgames.com/store/ru/p/{id}'
             photo = element['keyImages'][1]['url']
@@ -39,7 +44,11 @@ def free(message):
     games = parse.parse()
     for element in games:
         if element['promotions'] and element['promotions']['upcomingPromotionalOffers']:
-            title = f" *{element['title']}*\n\n{element['description']}"
+            date = element['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['endDate']
+            d = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
+            endData = f"Бесплатно до {d}"
+
+            title = f" *{element['title']}*\n\n{element['description']}\n*{endData}*"
             id = element['productSlug']
             url = f'https://www.epicgames.com/store/ru/p/{id}'
             photo = element['keyImages'][1]['url']
