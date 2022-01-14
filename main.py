@@ -20,7 +20,7 @@ def free(message):
         if element['promotions'] and element['promotions']['promotionalOffers']:
             date = element['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
             d = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
-            endData = f"Бесплатно до {{d.strftime('%H:%M %d %b.')}}"
+            endData = f"Бесплатно до {d.strftime('%H:%M %d %b.')}"
 
             title = f" *{element['title']}*\n\n{element['description']}\n*{endData}*"
             id = element['productSlug']
@@ -44,11 +44,13 @@ def free(message):
     games = parse.parse()
     for element in games:
         if element['promotions'] and element['promotions']['upcomingPromotionalOffers']:
-            date = element['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['endDate']
-            d = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
-            endData = f"Бесплатно до {d.strftime('%H:%M %d %b.')}"
+            enddate = element['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['endDate']
+            ed = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
+            startdate = element['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['startDate']
+            sd = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
+            data = f"Бесплатно c {sd.strftime('%H:%M %d %b.')} до {ed.strftime('%H:%M %d %b.')}"
 
-            title = f" *{element['title']}*\n\n{element['description']}\n*{endData}*"
+            title = f" *{element['title']}*\n\n{element['description']}\n*{data}*"
             id = element['productSlug']
             url = f'https://www.epicgames.com/store/ru/p/{id}'
             photo = element['keyImages'][1]['url']
