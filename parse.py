@@ -19,19 +19,3 @@ def parse():
     else:
         print("Error")
 
-r = requests.get(url)
-response_dict = r.json()
-games = response_dict['data']['Catalog']['searchStore']['elements']
-for element in games:
-    if element['promotions'] and element['promotions']['upcomingPromotionalOffers']:
-        date = element['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['endDate']
-        d = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
-
-        endData = f"Бесплатно до {d}"
-        print(endData)
-    if element['promotions'] and element['promotions']['promotionalOffers']:
-        date = element['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
-        d = datetime.strptime(date, "%Y-%m-%dT%H:%M:00.000Z") + timedelta(hours=2)
-        dr = d.format('%H:%M %d %b.', locale='ru')
-        endData = f"Бесплатно до {dr}"
-        print(endData)
