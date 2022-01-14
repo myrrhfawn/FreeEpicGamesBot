@@ -31,7 +31,7 @@ for element in games:
         print(endData)
     if element['promotions'] and element['promotions']['promotionalOffers']:
         date = element['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
-
-        d = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
-        endData = f"Бесплатно до {d}"
+        d = datetime.strptime(date, "%Y-%m-%dT%H:%M:00.000Z") + timedelta(hours=2)
+        dr = d.strftime('%H:%M %d %b.')
+        endData = f"Бесплатно до {dr}"
         print(endData)

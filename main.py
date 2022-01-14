@@ -20,7 +20,7 @@ def free(message):
         if element['promotions'] and element['promotions']['promotionalOffers']:
             date = element['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
             d = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
-            endData = f"Бесплатно до {d}"
+            endData = f"Бесплатно до {{d.strftime('%H:%M %d %b.')}}"
 
             title = f" *{element['title']}*\n\n{element['description']}\n*{endData}*"
             id = element['productSlug']
@@ -46,7 +46,7 @@ def free(message):
         if element['promotions'] and element['promotions']['upcomingPromotionalOffers']:
             date = element['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['endDate']
             d = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
-            endData = f"Бесплатно до {d}"
+            endData = f"Бесплатно до {d.strftime('%H:%M %d %b.')}"
 
             title = f" *{element['title']}*\n\n{element['description']}\n*{endData}*"
             id = element['productSlug']
