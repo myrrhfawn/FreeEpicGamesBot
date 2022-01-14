@@ -44,11 +44,11 @@ def free(message):
     games = parse.parse()
     for element in games:
         if element['promotions'] and element['promotions']['upcomingPromotionalOffers']:
-            enddate = element['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['endDate']
-            ed = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
-            startdate = element['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['startDate']
-            sd = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
-            data = f"Бесплатно c {sd.strftime('%H:%M %d %b.')} до {ed.strftime('%H:%M %d %b.')}"
+            edate = element['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['endDate']
+            ed = datetime.strptime(edate, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
+            sdate = element['promotions']['upcomingPromotionalOffers'][0]['promotionalOffers'][0]['startDate']
+            sd = datetime.strptime(sdate, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
+            data = f"Бесплатно з {sd.strftime('%H:%M %d %b.')} \nдо {ed.strftime('%H:%M %d %b.')}"
 
             title = f" *{element['title']}*\n\n{element['description']}\n*{data}*"
             id = element['productSlug']
