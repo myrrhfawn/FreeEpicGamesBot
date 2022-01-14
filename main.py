@@ -17,7 +17,7 @@ def free(message):
     games = parse.parse()
     for element in games:
         if element['promotions'] and element['promotions']['promotionalOffers']:
-            title = f"*{element['title']}*\n{element['description']}"
+            title = f" *{element['title']}*\n\n{element['description']}"
             id = element['productSlug']
             url = f'https://www.epicgames.com/store/ru/p/{id}'
             photo = element['keyImages'][1]['url']
@@ -39,7 +39,7 @@ def free(message):
     games = parse.parse()
     for element in games:
         if element['promotions'] and element['promotions']['upcomingPromotionalOffers']:
-            title = f"*{element['title']}*\n{element['description']}"
+            title = f" *{element['title']}*\n\n{element['description']}"
             id = element['productSlug']
             url = f'https://www.epicgames.com/store/ru/p/{id}'
             photo = element['keyImages'][1]['url']
