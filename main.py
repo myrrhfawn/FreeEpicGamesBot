@@ -4,6 +4,7 @@ import telebot
 from telebot import types
 from flask import Flask, request
 from datetime import datetime, timedelta
+import locale
 
 
 TOKEN = "2118961153:AAFISocvOir_rVhDEXMGHUL4NCJaaMzg4ng"
@@ -81,4 +82,5 @@ def webhook():
 
 if __name__ == '__main__':
     print("start")
+    locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
     server.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
