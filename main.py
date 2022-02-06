@@ -18,7 +18,7 @@ def free(message):
     chat_id = message.chat.id
     games = parse.parse()
     for element in games:
-        if element['promotions'] and element['promotions']['promotionalOffers']:
+        if element['promotions'] and element['promotions']['promotionalOffers'] and not element['promotions']['upcomingPromotionalOffers']:
             date = element['promotions']['promotionalOffers'][0]['promotionalOffers'][0]['endDate']
             d = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.000Z") + timedelta(hours=2)
             endData = f"Безплатно до {d.strftime('%H:%M %d %b.')}"
